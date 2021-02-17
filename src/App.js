@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
 
 export default function App() {
   const [type, setType] = useState("users");
+
+  // useEffect(() => {
+  //   console.log("render");
+  // });
+
+  useEffect(() => {
+    console.log(`Type change: ${type}`);
+  }, [type]);
 
   return (
     <div className="">
