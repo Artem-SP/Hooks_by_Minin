@@ -1,23 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./styles.css";
 
 export default function App() {
-  const [type, setType] = useState("users");
-
-  // useEffect(() => {
-  //   console.log("render");
-  // });
+  const [value, setValue] = useState("initial");
+  const renderCount = useRef(1);
+  const inputRef = useRef(null);
+  const prevValue = useRef("");
 
   useEffect(() => {
-    console.log(`Type change: ${type}`);
-  }, [type]);
+    renderCount.current + 1;
+  });
+
+  useEffect(() => {
+    prevValue.current = value;
+  }, [value]);
+
+  const focus = () => inputRef.current.focuc();
 
   return (
     <div className="">
-      <h1> ресурс: {type}</h1>
-      <button onClick={() => setType("users")}>Users</button>
-      <button onClick={() => setType("todo")}>Todo</button>
-      <button onClick={() => setType("posts")}>Posts</button>
+      <h1>Количество рендеров: {renderCount.current}</h1>
+      <h2>Прошлое состояние: {renderCount.current}</h2>
+      <input
+        ref={inputRef}
+        type="text"
+        onChange={(e) => setValue(e.target.value)}
+        value={value}
+      />
+      <button className="btn btn-success" onClick={focus}>
+        Фокус
+      </button>
     </div>
   );
 }
