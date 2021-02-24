@@ -8,20 +8,15 @@ import React, {
 import "./styles.css";
 import Main from "./Main";
 import Alert from "./Alert";
-
-export const AlertContext = React.createContext();
+import { AlertProvider } from "./alert/AlertContext";
 
 export default function App() {
-  const [alert, setAlert] = useState(false);
-
-  const toggleAlert = () => setAlert((prev) => !prev);
-
   return (
-    <AlertContext.Provider value={alert}>
+    <AlertProvider>
       <div className={"container pt-3"}>
         <Alert />
-        <Main toggle={toggleAlert} />
+        <Main toggle={() => {}} />
       </div>
-    </AlertContext.Provider>
+    </AlertProvider>
   );
 }
